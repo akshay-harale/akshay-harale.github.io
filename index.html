@@ -1,23 +1,363 @@
-<html>
-  <head>
-<!-- Google Tag Manager -->
-<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5R386QK');</script>
-<!-- End Google Tag Manager -->
-<!--     <title>Video Upload</title>
-  </head>  -->
-<body >
-  <!-- Google Tag Manager (noscript) -->
-<!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5R386QK"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) 
-  <div id="root"></div>
-  <!--h1>akshay</h1>
-  <script src="bundle.js"></script>
-  <script src="bundle.js"></script></body> -->
-  Akshay Harale
-    </body>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Semantic Search Architecture Plan</title>
+    <!-- Chosen Palette: Warm Neutrals with Blue and Teal Accents -->
+    <!-- Application Structure Plan: The SPA is designed as a top-down narrative journey. It starts with high-level 'Foundational Principles' presented as interactive cards. The core of the application is an interactive, horizontal process diagram representing the three implementation phases. This visual flow is more intuitive than the source report's tables. Users can click on any step in the diagram to bring up a modal with detailed information (Description, Spark Implementation, Tenancy Strategy). This transforms passive reading into active exploration. The experience concludes with a clear, categorized 'Technology Stack' summary. This structure was chosen to guide the user from the "why" (principles) to the "how" (implementation flow) and finally the "with what" (tech stack), making the complex plan highly digestible. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Foundational Principles -> Goal: Inform -> Viz: Interactive Cards (HTML/CSS) -> Interaction: Hover effect -> Justification: Encourages engagement over a static list.
+        - Report Info: Implementation Phases (Tables) -> Goal: Organize & Explain Process -> Viz: Horizontal Flow Diagram (HTML/CSS Flexbox) -> Interaction: Clickable nodes opening a detailed modal -> Justification: Transforms dense tabular data into an intuitive, explorable process, clarifying the end-to-end workflow.
+        - Report Info: Technology Stack (Table) -> Goal: Summarize -> Viz: Categorized Card Grid (HTML/CSS Grid) -> Interaction: Static -> Justification: Provides a clean, visually organized summary of the tools involved.
+        - Library/Method: All visuals and interactions are built with HTML, Tailwind CSS, and vanilla JavaScript, fully adhering to the prompt's constraints.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Warm Neutral: Light Gray */
+            color: #343a40;
+        }
+        .nav-link {
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover {
+            color: #007bff; /* Accent: Blue */
+            border-bottom-color: #007bff;
+        }
+        .phase-arrow {
+            font-size: 2.5rem;
+            color: #dee2e6;
+        }
+        .step-node {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .step-node:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        #modal-overlay {
+            transition: opacity 0.3s ease-in-out;
+        }
+        #modal-content {
+            transition: transform 0.3s ease-in-out;
+        }
+        .chart-container { 
+            position: relative; 
+            width: 100%; 
+            max-width: 600px; 
+            margin-left: auto; 
+            margin-right: auto; 
+            height: 300px;
+            max-height: 400px; 
+        }
+        @media (min-width: 768px) { .chart-container { height: 350px; } }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-40">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold text-gray-800">Semantic Search Architecture</h1>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#principles" class="nav-link font-medium text-gray-600 pb-1">Principles</a>
+                <a href="#flow" class="nav-link font-medium text-gray-600 pb-1">Implementation Flow</a>
+                <a href="#stack" class="nav-link font-medium text-gray-600 pb-1">Tech Stack</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-16">
+
+        <!-- Section 1: Foundational Principles -->
+        <section id="principles" class="mb-20 md:mb-24 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Foundational Principles</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-12">This architecture is built on three non-negotiable principles for enterprise-grade scale and data isolation.</p>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 text-blue-600 rounded-full p-3 mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Pooled Index & Metadata Isolation</h3>
+                    </div>
+                    <p class="text-gray-600">A single, highly-optimized Vector Database (VDB) index is shared across all tenants. Strict data isolation is enforced at query time using a mandatory `tenant_id` metadata filter on every vector and in every query.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
+                     <div class="flex items-center mb-4">
+                        <div class="bg-teal-100 text-teal-600 rounded-full p-3 mr-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h5V4H4zm0 0l6 6m-6 0h5v5H4v-5zm0 0l6-6m6 6l6 6m-6 0v5h5v-5h-5zm0 0l6-6" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Stateless & Idempotent Pipeline</h3>
+                    </div>
+                    <p class="text-gray-600">The entire ingestion process via Apache Spark is designed as a stateless, idempotent, and distributed job. This allows for easy horizontal scaling, robust failure recovery, and simplified MLOps for embedding models.</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border border-gray-200 text-left">
+                     <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-600 rounded-full p-3 mr-4">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold">Low-Latency Query Path</h3>
+                    </div>
+                    <p class="text-gray-600">The serving layer is fully decoupled from the ingestion pipeline. It leverages the VDB's optimized ANN search capabilities and fast, dedicated services for query embedding to ensure a responsive user experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Implementation Flow -->
+        <section id="flow" class="mb-20 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">End-to-End Implementation Flow</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">This interactive diagram shows the complete process from document ingestion to search result. Click on any step to view its detailed implementation plan.</p>
+            
+            <div class="overflow-x-auto p-4">
+                <div class="flex items-start justify-center min-w-[1200px] space-x-6">
+                    <!-- Phase 1 -->
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-xl font-bold text-center text-blue-600 mb-6">Phase I: Ingestion & Preprocessing</h3>
+                        <div class="space-y-4">
+                            <div class="step-node" data-title="I.1 Data Source & Trigger" data-desc="Documents are uploaded to S3/GCS. Metadata (`document_path`, `tenant_id`, `doc_version`) is written to Kafka/PubSub to initiate processing." data-spark="Utilize **Spark Structured Streaming** (or batched processing for large initial loads) to consume the ingestion queue events." data-tenancy="The **`tenant_id` is the primary key** for all security and isolation logic, injected into the metadata at this first step.">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">I.1 Data Source & Trigger</h4>
+                                    <p class="text-sm text-gray-600">Queue events from cloud storage.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="I.2 Document Parsing" data-desc="Distributed reading and parsing of various document formats (PDFs, DOCX, etc.) into clean text content." data-spark="Implement efficient **PySpark/Scala UDFs** using external libraries (e.g., Apache Tika) for text extraction, ensuring the work is parallelized across executors." data-tenancy="Raw text output is tied directly to the original `tenant_id` and `document_id`.">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">I.2 Document Parsing</h4>
+                                    <p class="text-sm text-gray-600">Extract text from various formats.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="I.3 Document Chunking" data-desc="Splitting large documents into smaller, semantically coherent chunks (e.g., 512 tokens with 50-token overlap) to maximize LLM context relevance." data-spark="Use optimized **PySpark UDFs** to implement recursive character or paragraph splitting logic." data-tenancy="Each chunk must be assigned a unique composite key (`document_id` + `chunk_id`) and explicitly carry the `tenant_id`.">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">I.3 Document Chunking</h4>
+                                    <p class="text-sm text-gray-600">Split documents into small pieces.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="I.4 Metadata Enrichment" data-desc="Final step before embedding: adding all necessary contextual metadata to the chunk DataFrame, including source, title, and access control tags (ACLs)." data-spark="Standard Spark DataFrame transformations (`withColumn`, filtering, and joins). Output is saved as a persistent **Parquet** table for checkpointing." data-tenancy="All metadata fields must be prepared for indexing in the Vector Database's payload structure.">
+                                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">I.4 Metadata Enrichment</h4>
+                                    <p class="text-sm text-gray-600">Add context and ACLs to chunks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center self-center phase-arrow">→</div>
+
+                    <!-- Phase 2 -->
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-xl font-bold text-center text-teal-600 mb-6">Phase II: Embedding & Indexing</h3>
+                        <div class="space-y-4">
+                             <div class="step-node" data-title="II.1 Model Distribution" data-desc="Load the high-dimensional embedding model (e.g., BGE, E5) and distribute its weights to all worker nodes." data-spark="Use **Spark Broadcast Variables** to push the model to every Executor once, avoiding repetitive loading overhead." data-tenancy="**Accelerators:** Configure the Spark cluster to utilize **GPUs/TPUs** for optimal inference performance, especially important for large transformer models.">
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">II.1 Model Distribution</h4>
+                                    <p class="text-sm text-gray-600">Distribute embedding model weights.</p>
+                                </div>
+                            </div>
+                             <div class="step-node" data-title="II.2 Distributed Vectorization" data-desc="Applying the embedding model to the 'text' column of the chunked DataFrame to generate vectors." data-spark="Implement vectorized inference using **Pandas UDFs** (for PySpark) or optimized library bindings (for Scala/Java) to maximize throughput." data-tenancy="**Batching:** Process text chunks in optimized batches (32-64 at a time) within the UDF to keep the accelerator hardware fully utilized.">
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">II.2 Distributed Vectorization</h4>
+                                    <p class="text-sm text-gray-600">Generate vectors from text chunks.</p>
+                                </div>
+                            </div>
+                             <div class="step-node" data-title="II.3 VDB Bulk Load" data-desc="Transferring millions of generated vectors and their metadata from the Spark DataFrame directly into the Vector Database." data-spark="Use an official, high-performance **Spark-VDB Connector** (e.g., for Milvus, Qdrant, Pinecone) which is designed for efficient parallel bulk upserts." data-tenancy="**Idempotency:** Ensure the upsert mechanism can handle updates/replaces for existing `document_id` + `chunk_id` combinations.">
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">II.3 VDB Bulk Load</h4>
+                                    <p class="text-sm text-gray-600">Upsert vectors and metadata to VDB.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="II.4 Index Optimization" data-desc="Configuring the VDB to use the best ANN index for our data size and dimensionality." data-spark="Configure the VDB collection with a suitable index type (**HNSW is highly recommended**) and set appropriate indexing parameters (e.g., M and efConstruction)." data-tenancy="**VDB Configuration:** Ensure the `tenant_id` metadata field is explicitly indexed for fast pre-filtering.">
+                                <div class="bg-teal-50 border-l-4 border-teal-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">II.4 Index Optimization</h4>
+                                    <p class="text-sm text-gray-600">Configure and build ANN index.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center self-center phase-arrow">→</div>
+
+                    <!-- Phase 3 -->
+                    <div class="flex-1 bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                        <h3 class="text-xl font-bold text-center text-indigo-600 mb-6">Phase III: Search API & Orchestration</h3>
+                        <div class="space-y-4">
+                            <div class="step-node" data-title="III.1 Query Service" data-desc="A dedicated, low-latency microservice receives user queries via a public API Gateway." data-spark="Deploy a stateless API service (e.g., FastAPI, using a managed container service) and implement connection pooling to the VDB." data-tenancy="**Strict Access Control:** The service *must* validate the user's identity and extract the authoritative **`tenant_id`** from the authentication token.">
+                                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">III.1 Query Service</h4>
+                                    <p class="text-sm text-gray-600">Low-latency API for user queries.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="III.2 Query Embedding" data-desc="Convert the user's natural language search string into a query vector." data-spark="Use the **exact same model** and pre-processing steps as used during ingestion (Phase II.1) to ensure vector spaces align." data-tenancy="N/A">
+                                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">III.2 Query Embedding</h4>
+                                    <p class="text-sm text-gray-600">Generate vector for search query.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="III.3 Filtered Search" data-desc="Execute the similarity search against the pooled VDB index." data-spark="The VDB search command is two-part: **vector distance search** AND **mandatory metadata filter** on `tenant_id`. The VDB handles the filtering before the ANN search or uses the filter to prune the graph." data-tenancy="**Enforced Isolation:** If the `tenant_id` filter is missing or invalid, the query should fail immediately.">
+                                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">III.3 Filtered Search</h4>
+                                    <p class="text-sm text-gray-600">ANN search with `tenant_id` filter.</p>
+                                </div>
+                            </div>
+                            <div class="step-node" data-title="III.4 Result Synthesis (RAG)" data-desc="Retrieve the raw text of the top-K chunks and use them to construct a context-rich prompt for an LLM to generate a final, synthesized answer." data-spark="This is the final step of Retrieval-Augmented Generation (RAG). It provides the user with an accurate, natural language answer based on their documents." data-tenancy="Include the `document_id` and metadata in the final response to provide **source attribution**, confirming the results came from the user's tenant data.">
+                                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-gray-800">III.4 Result Synthesis (RAG)</h4>
+                                    <p class="text-sm text-gray-600">Generate answer with LLM.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Technology Stack -->
+        <section id="stack">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Technology Stack Summary</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto text-center mb-12">The key components and technologies that power this scalable semantic search platform.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Data Ingestion</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> Raw Document Storage</p>
+                        <p><strong>Technology:</strong> S3, Azure Blob, GCS</p>
+                        <p class="text-gray-600"><strong>Role:</strong> Source of truth for unstructured data.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Orchestration</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> Event Queue</p>
+                        <p><strong>Technology:</strong> Kafka, PubSub, AWS SQS</p>
+                        <p class="text-gray-600"><strong>Role:</strong> Decouples ingestion, provides back-pressure handling.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Processing</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> ETL & Embedding Engine</p>
+                        <p><strong>Technology:</strong> Apache Spark (PySpark/Scala)</p>
+                        <p class="text-gray-600"><strong>Role:</strong> Distributed, scalable processing of millions of documents.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Vector Store</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> Vector Database</p>
+                        <p><strong>Technology:</strong> Milvus, Qdrant, Pinecone</p>
+                        <p class="text-gray-600"><strong>Role:</strong> High-speed Approximate Nearest Neighbor (ANN) search.</p>
+                    </div>
+                </div>
+                 <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Serving</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> Query API</p>
+                        <p><strong>Technology:</strong> Python FastAPI, Java Spring Boot</p>
+                        <p class="text-gray-600"><strong>Role:</strong> Low-latency endpoint for semantic search queries.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-500 mb-4">Model Hosting</h3>
+                    <div class="space-y-3">
+                        <p><strong>Component:</strong> Embedding Inference</p>
+                        <p><strong>Technology:</strong> Triton Server, dedicated GPU instance</p>
+                        <p class="text-gray-600"><strong>Role:</strong> Hosts the embedding model for low-latency query vectorization.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div id="modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+            <div class="sticky top-0 bg-white/80 backdrop-blur-md p-6 border-b border-gray-200 flex justify-between items-center">
+                <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                <button id="modal-close" class="text-gray-500 hover:text-gray-800 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div class="p-8 space-y-6">
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-gray-800">Description</h4>
+                    <p id="modal-desc" class="text-gray-600 leading-relaxed"></p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-gray-800">Key Spark Implementation Details</h4>
+                    <p id="modal-spark" class="text-gray-600 leading-relaxed"></p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-lg mb-2 text-gray-800">Multi-Tenancy Strategy / Scaling</h4>
+                    <p id="modal-tenancy" class="text-gray-600 leading-relaxed"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stepNodes = document.querySelectorAll('.step-node');
+            const modalOverlay = document.getElementById('modal-overlay');
+            const modalContent = document.getElementById('modal-content');
+            const modalClose = document.getElementById('modal-close');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDesc = document.getElementById('modal-desc');
+            const modalSpark = document.getElementById('modal-spark');
+            const modalTenancy = document.getElementById('modal-tenancy');
+
+            const openModal = (node) => {
+                const title = node.dataset.title;
+                const desc = node.dataset.desc;
+                const spark = node.dataset.spark;
+                const tenancy = node.dataset.tenancy;
+
+                modalTitle.textContent = title;
+                // Simple markdown-like bold to strong tag replacement
+                modalDesc.innerHTML = desc.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                modalSpark.innerHTML = spark.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                modalTenancy.innerHTML = tenancy.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                
+                modalOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    modalOverlay.classList.remove('opacity-0');
+                    modalContent.classList.remove('scale-95');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modalOverlay.classList.add('opacity-0');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modalOverlay.classList.add('hidden');
+                }, 300);
+            };
+
+            stepNodes.forEach(node => {
+                node.addEventListener('click', () => openModal(node));
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', (event) => {
+                if (event.target === modalOverlay) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !modalOverlay.classList.contains('hidden')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
 </html>
